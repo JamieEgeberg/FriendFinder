@@ -15,7 +15,7 @@ app.post('/api/friends/register/:distance', function (req, res) {
   console.log("eller her?");
   console.log(coords);
   if (coords.length = 2) {
-    register(req.userName, [coords[0], coords[1]], req.params.distance, function (err, docs) {
+    register(req.body.userName, [coords[0], coords[1]], req.params.distance, function (err, docs) {
       if (err) {
         res.status(400).send(err);
       }
