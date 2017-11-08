@@ -2,21 +2,30 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const register = require("./facade/FriendFacade");
-import { Constants, Location, Permissions } from 'expo';
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-  res.send('Friend Finder Demo!')
+  res.send('Friend Finder Demo!');
 })
 
 app.post('/api/friends/register/:distance', function (req, res) {
-  let pos=Location.getCurrentPositionAsync({});
-  register("Mister Me", [pos.coords.latitude, pos.coords.longitude], 90, function (err, docs) {
-    if (err) {
-      return console.log("ERROR", err)
-    }
-    console.log("DOCS", JSON.stringify(docs, null, "  "));
-  });
+  console.log("er vi her?");
+  let coords = req.body.loc.coordinates;
+  console.log("eller her?");
+  console.log(coords);
+  if (coords.length = 2) {
+    register(req.userName, [coords[0], coords[1]], req.params.distance, function (err, docs) {
+      if (err) {
+        res.status(400).send(err);
+      }
+
+      console.log("DOCS", JSON.stringify(docs, null, "  "));
+      res.send(JSON.stringify(docs, null, "  "));
+    });
+  } else {
+    res.status(400).send("we done goofed");
+  }
 
 })
 

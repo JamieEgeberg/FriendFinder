@@ -10,7 +10,7 @@ function register(userName, coordinates, distance, callback) {
     { upsert: true, returnNewDocument: true, new: true },
     function (err, user) {
       if (err) {
-        return callback(error);
+        return callback(err);
       }
       _findFriends(user, distInKM, callback);
     });
