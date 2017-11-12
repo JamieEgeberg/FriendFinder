@@ -14,7 +14,7 @@ var LocationSchema = new mongoose.Schema({
 //LocationSchema.index({ category: 1, loc: "2dsphere" });
 
 //Replace with URL to your own mongolab-db
-const MONGO_DB = 'mongodb://Jimbo:Jones@ds151024.mlab.com:51024/jimbo_db';
+const MONGO_DB = process.env.mongodb_uri;
 mongoose.Promise = global.Promise;
 mongoose.connect(MONGO_DB, { useMongoClient: true });
 

@@ -10,9 +10,10 @@ app.get('/', function (req, res) {
 })
 
 app.post('/api/friends/register/:distance', function (req, res) {
-  console.log("er vi her?");
+  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.body.loc));
+  console.log(JSON.stringify(req.body.userName));
   let coords = req.body.loc.coordinates;
-  console.log("eller her?");
   console.log(coords);
   if (coords.length = 2) {
     register(req.body.userName, [coords[0], coords[1]], req.params.distance, function (err, docs) {
